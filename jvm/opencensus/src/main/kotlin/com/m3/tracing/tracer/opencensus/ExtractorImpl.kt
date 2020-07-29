@@ -10,7 +10,9 @@ internal class ExtractorImpl : HttpExtractor<HttpRequestInfo, HttpResponseInfo>(
     override fun getHost(request: HttpRequestInfo) = request.tryGetMetadata(HttpRequestMetadataKey.Host)
     override fun getMethod(request: HttpRequestInfo) = request.tryGetMetadata(HttpRequestMetadataKey.Method)
 
-    override fun getPath(request: HttpRequestInfo) = request.tryGetMetadata(HttpRequestMetadataKey.Path)
+    override fun getPath(request: HttpRequestInfo): String?  {
+        return "[${request.tryGetMetadata(HttpRequestMetadataKey.Method)}] ${request.tryGetMetadata(HttpRequestMetadataKey.Url)}"
+    }
 
     override fun getUserAgent(request: HttpRequestInfo) = request.tryGetHeader("User-Agent")
 
